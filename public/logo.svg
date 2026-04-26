@@ -1,0 +1,49 @@
+<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="240" fill="white"/>
+  
+  <!-- Stars at top -->
+  <g id="stars">
+    <!-- Red star (left) -->
+    <polygon points="50,30 55,45 71,45 59,55 64,70 50,60 36,70 41,55 29,45 45,45" fill="#C8231A"/>
+    
+    <!-- Yellow star (center) -->
+    <polygon points="100,20 105,35 121,35 109,45 114,60 100,50 86,60 91,45 79,35 95,35" fill="#F5C518"/>
+    
+    <!-- Green star (right) -->
+    <polygon points="150,30 155,45 171,45 159,55 164,70 150,60 136,70 141,55 129,45 145,45" fill="#1B7A3E"/>
+  </g>
+  
+  <!-- Three girls holding hands -->
+  <g id="girls">
+    <!-- Left girl (green) -->
+    <circle cx="45" cy="100" r="8" fill="#1B7A3E"/>
+    <rect x="42" y="108" width="6" height="25" fill="#1B7A3E"/>
+    <rect x="38" y="110" width="14" height="4" fill="#1B7A3E"/>
+    <rect x="42" y="133" width="3" height="20" fill="#1B7A3E"/>
+    <rect x="48" y="133" width="3" height="20" fill="#1B7A3E"/>
+    
+    <!-- Center girl (yellow) -->
+    <circle cx="100" cy="95" r="9" fill="#F5C518"/>
+    <rect x="97" y="104" width="6" height="28" fill="#F5C518"/>
+    <rect x="92" y="106" width="16" height="4" fill="#F5C518"/>
+    <rect x="97" y="132" width="3" height="22" fill="#F5C518"/>
+    <rect x="103" y="132" width="3" height="22" fill="#F5C518"/>
+    
+    <!-- Right girl (red) -->
+    <circle cx="155" cy="100" r="8" fill="#C8231A"/>
+    <rect x="152" y="108" width="6" height="25" fill="#C8231A"/>
+    <rect x="148" y="110" width="14" height="4" fill="#C8231A"/>
+    <rect x="152" y="133" width="3" height="20" fill="#C8231A"/>
+    <rect x="158" y="133" width="3" height="20" fill="#C8231A"/>
+  </g>
+  
+  <!-- Holding hands - connecting lines -->
+  <line x1="53" y1="110" x2="92" y2="110" stroke="#999" stroke-width="1.5"/>
+  <line x1="108" y1="110" x2="147" y2="110" stroke="#999" stroke-width="1.5"/>
+  
+  <!-- Text "Zetwal Tifi" in handwriting style -->
+  <text x="100" y="195" font-family="cursive" font-size="20" fill="#1A1109" text-anchor="middle" font-style="italic">
+    Zetwal Tifi
+  </text>
+</svg>

@@ -1,0 +1,371 @@
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useRef } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
+
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 32 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.8, ease, delay },
+});
+
+function TrioStripe({ h = '3px', className = '' }: { h?: string; className?: string }) {
+  return (
+    <div className={`flex w-full ${className}`} style={{ height: h }}>
+      <div className="flex-1" style={{ background: 'var(--rouge)' }} />
+      <div className="flex-1" style={{ background: 'var(--jaune)' }} />
+      <div className="flex-1" style={{ background: 'var(--vert)' }} />
+    </div>
+  );
+}
+
+export default function HomePage() {
+  const { t } = useLanguage();
+  const heroRef  = useRef<HTMLElement>(null);
+  const quoteRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
+  const rawLogoY = useTransform(heroScroll, [0, 1], [0, 80]);
+  const logoY    = useSpring(rawLogoY, { stiffness: 60, damping: 20 });
+
+  const { scrollYProgress: quoteScroll } = useScroll({ target: quoteRef, offset: ['start end', 'center center'] });
+  const quoteX = useTransform(quoteScroll, [0, 1], ['8%', '0%']);
+
+  const missionItems = [
+    { num: '01', accent: 'var(--rouge)', titleKey: 'mission.01.title', descKey: 'mission.01.desc', detailKey: 'mission.01.detail' },
+    { num: '02', accent: 'var(--jaune)', titleKey: 'mission.02.title', descKey: 'mission.02.desc', detailKey: 'mission.02.detail' },
+    { num: '03', accent: 'var(--vert)',  titleKey: 'mission.03.title', descKey: 'mission.03.desc', detailKey: 'mission.03.detail' },
+  ] as const;
+
+  return (
+    <div style={{ background: 'var(--cream)' }}>
+
+      {/* ════ HERO ════ */}
+      <section
+        ref={heroRef}
+        className="relative overflow-hidden flex items-center"
+        style={{ minHeight: '100svh', paddingTop: '5rem', paddingBottom: '5rem' }}
+      >
+        <div
+          className="absolute left-0 top-0 bottom-0 w-0.75 hidden lg:block"
+          style={{ background: 'linear-gradient(to bottom, var(--rouge) 33%, var(--jaune) 66%, var(--vert))', opacity: 0.6 }}
+        />
+
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+            {/* Left — text */}
+            <motion.div initial={{ opacity: 0, x: -32 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease }}>
+              <motion.p
+                className="small-caps mb-7 flex items-center gap-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <span style={{ width: '1.5rem', height: '1.5px', background: 'var(--rouge)', display: 'inline-block' }} />
+                {t('hero.tagline')}
+              </motion.p>
+
+              <motion.h1
+                className="leading-none tracking-tight mb-4"
+                style={{ fontSize: 'clamp(2.8rem, 6.5vw, 5.5rem)' }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease, delay: 0.15 }}
+              >
+                {t('hero.h1a')}{' '}
+                <em className="italic" style={{ color: 'var(--rouge)' }}>{t('hero.h1b')}</em>
+                <br />
+                {t('hero.h1c')}{' '}
+                <em className="italic" style={{ color: 'var(--vert)' }}>{t('hero.h1d')}</em>
+              </motion.h1>
+
+              <motion.div
+                initial={{ scaleX: 0, originX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.8, ease, delay: 0.5 }}
+              >
+                <TrioStripe className="w-20 mb-7" />
+              </motion.div>
+
+              <motion.p
+                className="mb-10 leading-relaxed"
+                style={{ fontSize: '1.125rem', color: 'var(--mid)', fontWeight: 300, maxWidth: '32rem' }}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
+              >
+                <em className="font-display italic" style={{ color: 'var(--dark)', fontSize: '1.1em' }}>
+                  {t('hero.subKreol')}
+                </em>{' '}
+                {t('hero.sub')}
+              </motion.p>
+
+              <motion.div
+                className="flex flex-wrap gap-4 mb-10"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.55 }}
+              >
+                <Link to="/about"><button className="btn-primary">{t('hero.cta1')} <ArrowRight size={15} /></button></Link>
+                <Link to="/programs"><button className="btn-outline-dark">{t('hero.cta2')}</button></Link>
+              </motion.div>
+
+              <motion.p
+                className="small-caps"
+                style={{ color: 'var(--muted)' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+              >
+                {t('hero.verified')}
+              </motion.p>
+            </motion.div>
+
+            {/* Right — logo with parallax */}
+            <motion.div
+              className="flex items-center justify-center relative"
+              style={{ y: logoY }}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, ease, delay: 0.2 }}
+            >
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{ background: 'radial-gradient(circle at center, rgba(245,197,24,0.1) 0%, transparent 68%)' }}
+              />
+              <motion.span className="font-display absolute" style={{ top: '8%', left: '14%', fontSize: '1.6rem', color: 'var(--rouge)' }} animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0 }}>★</motion.span>
+              <motion.span className="font-display absolute" style={{ bottom: '16%', left: '6%', fontSize: '1.25rem', color: 'var(--jaune)' }} animate={{ y: [0, -9, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}>★</motion.span>
+              <motion.span className="font-display absolute" style={{ bottom: '14%', right: '8%', fontSize: '1.4rem', color: 'var(--vert)' }} animate={{ y: [0, -11, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 2.4 }}>★</motion.span>
+              <motion.img
+                src="/Logo.png"
+                alt="OZETI — Zetwal Tifi"
+                className="relative z-10"
+                style={{ width: 'clamp(240px, 38vw, 420px)', height: 'auto' }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        <motion.div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.2 }}
+        >
+          <span className="small-caps" style={{ color: 'var(--muted)', fontSize: '0.68rem' }}>{t('hero.scroll')}</span>
+          <motion.div
+            style={{ width: '1px', height: '36px', background: 'var(--muted)', opacity: 0.35 }}
+            animate={{ scaleY: [0, 1, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.6 }}
+          />
+        </motion.div>
+      </section>
+
+      {/* ════ MARQUEE ════ */}
+      <div
+        className="overflow-hidden"
+        style={{ borderTop: '1px solid rgba(74,55,40,0.1)', borderBottom: '1px solid rgba(74,55,40,0.1)', background: 'white', padding: '0.875rem 0' }}
+      >
+        <motion.div
+          className="flex whitespace-nowrap"
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
+        >
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className="small-caps inline-flex items-center gap-8 px-10" style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>
+              <span className="font-display italic" style={{ color: 'var(--rouge)', fontSize: '1.1rem' }}>★</span>
+              {t('ticker.1')}
+              <span className="font-display italic" style={{ color: 'var(--jaune)', fontSize: '1.1rem' }}>★</span>
+              {t('ticker.2')}
+              <span className="font-display italic" style={{ color: 'var(--vert)', fontSize: '1.1rem' }}>★</span>
+              {t('ticker.3')}
+            </span>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ════ MISSION ════ */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <motion.div className="mb-20" {...fadeUp()}>
+            <p className="small-caps mb-3" style={{ color: 'var(--rouge)' }}>{t('mission.label')}</p>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', maxWidth: '24rem' }}>{t('mission.h2')}</h2>
+          </motion.div>
+
+          <div style={{ borderTop: '1px solid rgba(74,55,40,0.1)' }}>
+            {missionItems.map(({ num, accent, titleKey, descKey, detailKey }, i) => (
+              <motion.div
+                key={num}
+                className="group grid grid-cols-12 gap-4 lg:gap-8 py-10 lg:py-14 items-start"
+                style={{ borderBottom: '1px solid rgba(74,55,40,0.1)' }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.65, ease, delay: i * 0.08 }}
+              >
+                <div className="col-span-2 lg:col-span-1 pt-1">
+                  <span
+                    className="font-display font-bold select-none block"
+                    style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(74,55,40,0.1)', transition: 'color 0.35s ease' }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = accent)}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(74,55,40,0.1)')}
+                  >
+                    {num}
+                  </span>
+                </div>
+                <div className="col-span-10 lg:col-span-11">
+                  <div className="w-5 h-0.5 mb-5 transition-all duration-300 group-hover:w-14" style={{ background: accent }} />
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
+                    <div className="lg:col-span-1">
+                      <h3 className="font-display font-bold leading-tight" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', whiteSpace: 'pre-line', color: 'var(--dark)' }}>
+                        {t(titleKey)}
+                      </h3>
+                    </div>
+                    <div className="lg:col-span-2">
+                      <p className="text-base leading-relaxed mb-3" style={{ color: 'var(--mid)', fontWeight: 300 }}>{t(descKey)}</p>
+                      <p className="text-sm italic font-display" style={{ color: accent }}>{t(detailKey)}</p>
+                      <Link to="/programs" className="inline-flex items-center gap-1.5 text-sm font-medium mt-5 transition-all duration-200 hover:gap-3" style={{ color: accent }}>
+                        {t('mission.more')} <ArrowUpRight size={14} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════ PULL QUOTE ════ */}
+      <section
+        ref={quoteRef}
+        className="relative overflow-hidden flex flex-col items-center justify-center"
+        style={{ minHeight: '80svh', background: 'var(--dark)', padding: 'clamp(4rem, 10vw, 8rem) 0' }}
+      >
+        <TrioStripe className="absolute top-0 left-0 right-0" />
+        <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none" aria-hidden>
+          <span className="font-display" style={{ fontSize: 'clamp(24rem, 60vw, 80rem)', color: 'rgba(255,255,255,0.025)', lineHeight: 1, userSelect: 'none' }}>★</span>
+        </div>
+
+        <div className="relative z-10 text-center px-4" style={{ maxWidth: 'min(92vw, 1000px)' }}>
+          <motion.p className="small-caps mb-10" style={{ color: 'rgba(255,255,255,0.3)' }} {...fadeUp()}>
+            Slogan · OZETI — Haïti
+          </motion.p>
+          <motion.p
+            className="font-display italic text-white leading-tight"
+            style={{ fontSize: 'clamp(2.8rem, 8.5vw, 8rem)', x: quoteX }}
+            initial={{ opacity: 0, x: '6%' }}
+            whileInView={{ opacity: 1, x: '0%' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 1, ease }}
+          >
+            "Zetwal ou briye
+            <br />
+            <span style={{ color: 'var(--jaune)' }}>deja tifi"</span>
+          </motion.p>
+          <motion.p
+            className="mt-10"
+            style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.875rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 300 }}
+            {...fadeUp(0.2)}
+          >
+            {t('hero.sub').replace('— ', '')}
+          </motion.p>
+        </div>
+        <TrioStripe className="absolute bottom-0 left-0 right-0" />
+      </section>
+
+      {/* ════ FOUNDER ════ */}
+      <section className="section-padding">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
+
+            <motion.div
+              className="relative h-110 flex items-center justify-center order-2 lg:order-1"
+              initial={{ opacity: 0, x: -36 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease }}
+            >
+              <div className="absolute inset-10 rounded-3xl" style={{ background: 'var(--vert-light)', border: '1.5px solid rgba(27,122,62,0.18)', transform: 'rotate(-3deg)' }} />
+              <div className="absolute inset-10 rounded-3xl" style={{ background: 'var(--jaune-light)', border: '1.5px solid rgba(245,197,24,0.3)', transform: 'rotate(1.5deg)' }} />
+              <div className="relative z-10 rounded-2xl overflow-hidden" style={{ width: '220px', height: '300px', boxShadow: '0 20px 60px rgba(26,17,9,0.18)' }}>
+                <img
+                  src="/founder.jpg"
+                  alt="Rose Darline Chatelain — Fondatrice OZETI"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+                />
+              </div>
+              <motion.div className="absolute top-6 right-8" animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
+                <span className="font-display" style={{ fontSize: '1.75rem', color: 'var(--jaune)' }}>★</span>
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="order-1 lg:order-2"
+              initial={{ opacity: 0, x: 36 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease }}
+            >
+              <p className="small-caps mb-3" style={{ color: 'var(--rouge)' }}>{t('founder.label')}</p>
+              <h2 className="mb-2 leading-tight" style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)' }}>
+                {t('founder.h2')}
+              </h2>
+              <TrioStripe className="w-12 mt-4 mb-8" />
+              <p
+                className="font-display italic mb-7"
+                style={{ fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', color: 'var(--dark)', lineHeight: 1.5, borderLeft: '3px solid var(--rouge)', paddingLeft: '1.25rem' }}
+              >
+                {t('quote.text')}
+              </p>
+              <p className="leading-relaxed mb-4" style={{ color: 'var(--mid)', fontWeight: 300, fontSize: '0.9375rem' }}>
+                {t('founder.p1')}
+              </p>
+              <p className="leading-relaxed mb-10" style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>
+                {t('founder.p2')}
+              </p>
+              <Link to="/about">
+                <button className="btn-outline-dark">{t('founder.cta')} <ArrowRight size={15} /></button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════ CTA ════ */}
+      <section className="relative overflow-hidden" style={{ background: 'var(--rouge)', padding: 'clamp(5rem, 12vw, 9rem) 0' }}>
+        <div className="absolute inset-0 flex items-center justify-end pr-8 pointer-events-none select-none overflow-hidden" aria-hidden>
+          <span className="font-display italic" style={{ fontSize: 'clamp(8rem, 22vw, 20rem)', color: 'rgba(255,255,255,0.06)', lineHeight: 1, whiteSpace: 'nowrap' }}>
+            {t('cta.water')}
+          </span>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
+          <motion.div className="max-w-2xl" {...fadeUp()}>
+            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>{t('cta.label')}</p>
+            <h2 className="text-white leading-tight mb-8" style={{ fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}>
+              {t('cta.h2')}
+            </h2>
+            <p className="text-lg leading-relaxed mb-10" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300, maxWidth: '28rem' }}>
+              {t('cta.sub')}
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link to="/contact">
+                <button className="btn-secondary" style={{ background: 'var(--jaune)', color: 'var(--dark)' }}>{t('cta.btn1')}</button>
+              </Link>
+              <Link to="/programs">
+                <button className="btn-outline">{t('cta.btn2')}</button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}
