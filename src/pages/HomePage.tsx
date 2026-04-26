@@ -256,7 +256,7 @@ export default function HomePage() {
 
         <div className="relative z-10 text-center px-4" style={{ maxWidth: 'min(92vw, 1000px)' }}>
           <motion.p className="small-caps mb-10" style={{ color: 'rgba(255,255,255,0.3)' }} {...fadeUp()}>
-            Slogan · OZETI — Haïti
+            {t('quote.label')}
           </motion.p>
           <motion.p
             className="font-display italic text-white leading-tight"
@@ -275,7 +275,7 @@ export default function HomePage() {
             style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.875rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 300 }}
             {...fadeUp(0.2)}
           >
-            {t('hero.sub').replace('— ', '')}
+            {t('quote.subtitle')}
           </motion.p>
         </div>
         <TrioStripe className="absolute bottom-0 left-0 right-0" />

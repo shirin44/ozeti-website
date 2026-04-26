@@ -46,6 +46,8 @@ const translations = {
     /* ── Quote ── */
     'quote.text':   '« Chaque étoile brille différemment — notre rôle est de protéger cette lumière. »',
     'quote.author': '— Rose Darline Chatelain, Fondatrice',
+    'quote.label':    'Slogan · OZETI — Haïti',
+    'quote.subtitle': 'Ton étoile brille déjà, jeune fille',
 
     /* ── Founder ── */
     'founder.label':  'La fondatrice',
@@ -220,6 +222,8 @@ const translations = {
     /* ── Quote ── */
     'quote.text':   '« Every star shines differently — our role is to protect that light. »',
     'quote.author': '— Rose Darline Chatelain, Founder',
+    'quote.label':    'Motto · OZETI — Haiti',
+    'quote.subtitle': 'Your star already shines, young girl',
 
     /* ── Founder ── */
     'founder.label':  'The founder',
