@@ -29,16 +29,16 @@ export default function HomePage() {
   const quoteRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  const rawLogoY = useTransform(heroScroll, [0, 1], [0, 80]);
-  const logoY    = useSpring(rawLogoY, { stiffness: 60, damping: 20 });
+  const rawImgY = useTransform(heroScroll, [0, 1], [0, 60]);
+  const imgY    = useSpring(rawImgY, { stiffness: 60, damping: 20 });
 
   const { scrollYProgress: quoteScroll } = useScroll({ target: quoteRef, offset: ['start end', 'center center'] });
   const quoteX = useTransform(quoteScroll, [0, 1], ['8%', '0%']);
 
   const missionItems = [
-    { num: '01', accent: 'var(--rouge)', titleKey: 'mission.01.title', descKey: 'mission.01.desc', detailKey: 'mission.01.detail' },
-    { num: '02', accent: 'var(--jaune)', titleKey: 'mission.02.title', descKey: 'mission.02.desc', detailKey: 'mission.02.detail' },
-    { num: '03', accent: 'var(--vert)',  titleKey: 'mission.03.title', descKey: 'mission.03.desc', detailKey: 'mission.03.detail' },
+    { num: '01', accent: 'var(--rouge)', img: '/1.JPG', titleKey: 'mission.01.title', descKey: 'mission.01.desc', detailKey: 'mission.01.detail' },
+    { num: '02', accent: 'var(--jaune)', img: '/2.JPG', titleKey: 'mission.02.title', descKey: 'mission.02.desc', detailKey: 'mission.02.detail' },
+    { num: '03', accent: 'var(--vert)',  img: '/3.JPG', titleKey: 'mission.03.title', descKey: 'mission.03.desc', detailKey: 'mission.03.detail' },
   ] as const;
 
   return (
@@ -56,7 +56,7 @@ export default function HomePage() {
         />
 
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             {/* Left — text */}
             <motion.div initial={{ opacity: 0, x: -32 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.9, ease }}>
@@ -84,11 +84,7 @@ export default function HomePage() {
                 <em className="italic" style={{ color: 'var(--vert)' }}>{t('hero.h1d')}</em>
               </motion.h1>
 
-              <motion.div
-                initial={{ scaleX: 0, originX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.8, ease, delay: 0.5 }}
-              >
+              <motion.div initial={{ scaleX: 0, originX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, ease, delay: 0.5 }}>
                 <TrioStripe className="w-20 mb-7" />
               </motion.div>
 
@@ -126,29 +122,43 @@ export default function HomePage() {
               </motion.p>
             </motion.div>
 
-            {/* Right — logo with parallax */}
+            {/* Right — hero photo */}
             <motion.div
-              className="flex items-center justify-center relative"
-              style={{ y: logoY }}
-              initial={{ opacity: 0, scale: 0.92 }}
+              className="relative hidden lg:block"
+              style={{ y: imgY }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease, delay: 0.2 }}
+              transition={{ duration: 1.1, ease, delay: 0.2 }}
             >
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{ background: 'radial-gradient(circle at center, rgba(245,197,24,0.1) 0%, transparent 68%)' }}
-              />
-              <motion.span className="font-display absolute" style={{ top: '8%', left: '14%', fontSize: '1.6rem', color: 'var(--rouge)' }} animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0 }}>★</motion.span>
-              <motion.span className="font-display absolute" style={{ bottom: '16%', left: '6%', fontSize: '1.25rem', color: 'var(--jaune)' }} animate={{ y: [0, -9, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}>★</motion.span>
-              <motion.span className="font-display absolute" style={{ bottom: '14%', right: '8%', fontSize: '1.4rem', color: 'var(--vert)' }} animate={{ y: [0, -11, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: 2.4 }}>★</motion.span>
-              <motion.img
-                src="/Logo.png"
-                alt="OZETI — Zetwal Tifi"
-                className="relative z-10"
-                style={{ width: 'clamp(240px, 38vw, 420px)', height: 'auto' }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              />
+              {/* Offset accent frames */}
+              <div className="absolute -inset-3 rounded-3xl" style={{ background: 'var(--jaune-light)', transform: 'rotate(2deg)', zIndex: 0 }} />
+              <div className="absolute -inset-3 rounded-3xl" style={{ background: 'var(--rouge-light)', transform: 'rotate(-1.5deg)', zIndex: 0 }} />
+
+              {/* Photo */}
+              <div className="relative rounded-2xl overflow-hidden" style={{ zIndex: 1, boxShadow: '0 32px 80px rgba(26,17,9,0.18)' }}>
+                <img
+                  src="/Hero.JPG"
+                  alt="OZETI — jeunes filles"
+                  style={{ width: '100%', height: 'clamp(480px, 55vh, 680px)', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+                />
+                {/* Bottom gradient fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-32" style={{ background: 'linear-gradient(to top, rgba(250,248,244,0.6), transparent)' }} />
+              </div>
+
+              {/* Trio stripe accent */}
+              <div className="absolute -bottom-1 left-4 right-4 rounded-b-2xl overflow-hidden" style={{ height: '4px', zIndex: 2 }}>
+                <TrioStripe />
+              </div>
+
+              {/* Floating star badge */}
+              <motion.div
+                className="absolute -top-4 -right-4 z-10 flex items-center justify-center rounded-full font-display font-bold text-lg"
+                style={{ width: '56px', height: '56px', background: 'var(--jaune)', color: 'var(--dark)', boxShadow: '0 8px 24px rgba(245,197,24,0.4)' }}
+                animate={{ y: [0, -6, 0], rotate: [0, 5, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                ★
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -200,17 +210,18 @@ export default function HomePage() {
           </motion.div>
 
           <div style={{ borderTop: '1px solid rgba(74,55,40,0.1)' }}>
-            {missionItems.map(({ num, accent, titleKey, descKey, detailKey }, i) => (
+            {missionItems.map(({ num, accent, img, titleKey, descKey, detailKey }, i) => (
               <motion.div
                 key={num}
-                className="group grid grid-cols-12 gap-4 lg:gap-8 py-10 lg:py-14 items-start"
+                className="group grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 py-12 lg:py-16 items-center"
                 style={{ borderBottom: '1px solid rgba(74,55,40,0.1)' }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.65, ease, delay: i * 0.08 }}
               >
-                <div className="col-span-2 lg:col-span-1 pt-1">
+                {/* Number */}
+                <div className="lg:col-span-1 hidden lg:block">
                   <span
                     className="font-display font-bold select-none block"
                     style={{ fontSize: 'clamp(2.5rem, 4vw, 4rem)', lineHeight: 1, color: 'rgba(74,55,40,0.1)', transition: 'color 0.35s ease' }}
@@ -220,21 +231,33 @@ export default function HomePage() {
                     {num}
                   </span>
                 </div>
-                <div className="col-span-10 lg:col-span-11">
+
+                {/* Content */}
+                <div className="lg:col-span-7">
                   <div className="w-5 h-0.5 mb-5 transition-all duration-300 group-hover:w-14" style={{ background: accent }} />
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
-                    <div className="lg:col-span-1">
-                      <h3 className="font-display font-bold leading-tight" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', whiteSpace: 'pre-line', color: 'var(--dark)' }}>
-                        {t(titleKey)}
-                      </h3>
-                    </div>
-                    <div className="lg:col-span-2">
-                      <p className="text-base leading-relaxed mb-3" style={{ color: 'var(--mid)', fontWeight: 300 }}>{t(descKey)}</p>
-                      <p className="text-sm italic font-display" style={{ color: accent }}>{t(detailKey)}</p>
-                      <Link to="/programs" className="inline-flex items-center gap-1.5 text-sm font-medium mt-5 transition-all duration-200 hover:gap-3" style={{ color: accent }}>
-                        {t('mission.more')} <ArrowUpRight size={14} />
-                      </Link>
-                    </div>
+                  <p className="small-caps mb-3 lg:hidden" style={{ color: accent }}>{num}</p>
+                  <h3 className="font-display font-bold leading-tight mb-4" style={{ fontSize: 'clamp(1.4rem, 2.2vw, 1.75rem)', whiteSpace: 'pre-line', color: 'var(--dark)' }}>
+                    {t(titleKey)}
+                  </h3>
+                  <p className="text-base leading-relaxed mb-3" style={{ color: 'var(--mid)', fontWeight: 300 }}>{t(descKey)}</p>
+                  <p className="text-sm italic font-display mb-5" style={{ color: accent }}>{t(detailKey)}</p>
+                  <Link to="/programs" className="inline-flex items-center gap-1.5 text-sm font-medium transition-all duration-200 hover:gap-3" style={{ color: accent }}>
+                    {t('mission.more')} <ArrowUpRight size={14} />
+                  </Link>
+                </div>
+
+                {/* Photo */}
+                <div className="lg:col-span-4">
+                  <div
+                    className="overflow-hidden rounded-2xl"
+                    style={{ boxShadow: '0 8px 32px rgba(26,17,9,0.1)', borderTop: `3px solid ${accent}` }}
+                  >
+                    <img
+                      src={img}
+                      alt={t(titleKey)}
+                      className="w-full transition-transform duration-700 group-hover:scale-105"
+                      style={{ height: '240px', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -247,15 +270,25 @@ export default function HomePage() {
       <section
         ref={quoteRef}
         className="relative overflow-hidden flex flex-col items-center justify-center"
-        style={{ minHeight: '80svh', background: 'var(--dark)', padding: 'clamp(4rem, 10vw, 8rem) 0' }}
+        style={{
+          minHeight: '80svh',
+          backgroundImage: 'url(/bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          padding: 'clamp(4rem, 10vw, 8rem) 0',
+        }}
       >
+        {/* Dark overlay */}
+        <div className="absolute inset-0" style={{ background: 'rgba(26,17,9,0.72)' }} />
         <TrioStripe className="absolute top-0 left-0 right-0" />
+
         <div className="absolute inset-0 flex items-center justify-center select-none pointer-events-none" aria-hidden>
-          <span className="font-display" style={{ fontSize: 'clamp(24rem, 60vw, 80rem)', color: 'rgba(255,255,255,0.025)', lineHeight: 1, userSelect: 'none' }}>★</span>
+          <span className="font-display" style={{ fontSize: 'clamp(24rem, 60vw, 80rem)', color: 'rgba(255,255,255,0.04)', lineHeight: 1, userSelect: 'none' }}>★</span>
         </div>
 
         <div className="relative z-10 text-center px-4" style={{ maxWidth: 'min(92vw, 1000px)' }}>
-          <motion.p className="small-caps mb-10" style={{ color: 'rgba(255,255,255,0.3)' }} {...fadeUp()}>
+          <motion.p className="small-caps mb-10" style={{ color: 'rgba(255,255,255,0.4)' }} {...fadeUp()}>
             {t('quote.label')}
           </motion.p>
           <motion.p
@@ -272,7 +305,7 @@ export default function HomePage() {
           </motion.p>
           <motion.p
             className="mt-10"
-            style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.875rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 300 }}
+            style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 300 }}
             {...fadeUp(0.2)}
           >
             {t('quote.subtitle')}
@@ -315,9 +348,7 @@ export default function HomePage() {
               transition={{ duration: 0.9, ease }}
             >
               <p className="small-caps mb-3" style={{ color: 'var(--rouge)' }}>{t('founder.label')}</p>
-              <h2 className="mb-2 leading-tight" style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)' }}>
-                {t('founder.h2')}
-              </h2>
+              <h2 className="mb-2 leading-tight" style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)' }}>{t('founder.h2')}</h2>
               <TrioStripe className="w-12 mt-4 mb-8" />
               <p
                 className="font-display italic mb-7"
@@ -325,12 +356,8 @@ export default function HomePage() {
               >
                 {t('quote.text')}
               </p>
-              <p className="leading-relaxed mb-4" style={{ color: 'var(--mid)', fontWeight: 300, fontSize: '0.9375rem' }}>
-                {t('founder.p1')}
-              </p>
-              <p className="leading-relaxed mb-10" style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>
-                {t('founder.p2')}
-              </p>
+              <p className="leading-relaxed mb-4" style={{ color: 'var(--mid)', fontWeight: 300, fontSize: '0.9375rem' }}>{t('founder.p1')}</p>
+              <p className="leading-relaxed mb-10" style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>{t('founder.p2')}</p>
               <Link to="/about">
                 <button className="btn-outline-dark">{t('founder.cta')} <ArrowRight size={15} /></button>
               </Link>
@@ -349,12 +376,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
           <motion.div className="max-w-2xl" {...fadeUp()}>
             <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.55)' }}>{t('cta.label')}</p>
-            <h2 className="text-white leading-tight mb-8" style={{ fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}>
-              {t('cta.h2')}
-            </h2>
-            <p className="text-lg leading-relaxed mb-10" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300, maxWidth: '28rem' }}>
-              {t('cta.sub')}
-            </p>
+            <h2 className="text-white leading-tight mb-8" style={{ fontSize: 'clamp(2.25rem, 5vw, 4.5rem)' }}>{t('cta.h2')}</h2>
+            <p className="text-lg leading-relaxed mb-10" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300, maxWidth: '28rem' }}>{t('cta.sub')}</p>
             <div className="flex flex-wrap gap-4">
               <Link to="/contact">
                 <button className="btn-secondary" style={{ background: 'var(--jaune)', color: 'var(--dark)' }}>{t('cta.btn1')}</button>
