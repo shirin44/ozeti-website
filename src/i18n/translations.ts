@@ -80,7 +80,7 @@ const translations = {
     'about.stat4.n': '100%', 'about.stat4.l': 'Basée en Haïti',
     'about.vision.label': 'Notre vision',
     'about.vision.h3':   'Vision & Mission',
-    'about.vision.v':    'Un Haïti où chaque fille a les ressources, la confiance et les opportunités pour réaliser son plein potentiel.',
+    'about.vision.v':    'Une Haïti où chaque fille a les ressources, la confiance et les opportunités pour réaliser son plein potentiel.',
     'about.vision.m':    'Accompagner les adolescentes haïtiennes dans leur développement éducatif, psychosocial et économique à travers des programmes adaptés et un soutien communautaire fort.',
     'about.vision.vlabel': 'Vision',
     'about.vision.mlabel': 'Mission',

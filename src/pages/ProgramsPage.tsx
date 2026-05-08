@@ -21,7 +21,7 @@ type ColorKey = keyof typeof COLORS;
 
 function TrioStripe() {
   return (
-    <div className="flex h-[3px]">
+    <div className="flex h-0.75">
       <div className="flex-1" style={{ background: 'var(--rouge)' }} />
       <div className="flex-1" style={{ background: 'var(--jaune)' }} />
       <div className="flex-1" style={{ background: 'var(--vert)' }} />
@@ -32,10 +32,10 @@ function TrioStripe() {
 export default function ProgramsPage() {
   const { t, tArr } = useLanguage();
 
-  const programs: { id: number; num: string; color: ColorKey; titleKey: string; tagKey: string; descKey: string; itemsKey: string; impactValue: string; impactLabelKey: string }[] = [
-    { id: 1, num: '01', color: 'rouge', titleKey: 'programs.edu.title', tagKey: 'programs.edu.tag', descKey: 'programs.edu.desc', itemsKey: 'programs.edu.items', impactValue: '200+', impactLabelKey: 'programs.stat1.l' },
-    { id: 2, num: '02', color: 'jaune', titleKey: 'programs.psy.title', tagKey: 'programs.psy.tag', descKey: 'programs.psy.desc', itemsKey: 'programs.psy.items', impactValue: '200+', impactLabelKey: 'programs.stat1.l' },
-    { id: 3, num: '03', color: 'vert',  titleKey: 'programs.eco.title', tagKey: 'programs.eco.tag', descKey: 'programs.eco.desc', itemsKey: 'programs.eco.items', impactValue: '200+', impactLabelKey: 'programs.stat1.l' },
+  const programs: { id: number; num: string; color: ColorKey; titleKey: string; tagKey: string; descKey: string; itemsKey: string; img: string }[] = [
+    { id: 1, num: '01', color: 'rouge', titleKey: 'programs.edu.title', tagKey: 'programs.edu.tag', descKey: 'programs.edu.desc', itemsKey: 'programs.edu.items', img: '/impact1.jpg' },
+    { id: 2, num: '02', color: 'jaune', titleKey: 'programs.psy.title', tagKey: 'programs.psy.tag', descKey: 'programs.psy.desc', itemsKey: 'programs.psy.items', img: '/impact2.jpg' },
+    { id: 3, num: '03', color: 'vert',  titleKey: 'programs.eco.title', tagKey: 'programs.eco.tag', descKey: 'programs.eco.desc', itemsKey: 'programs.eco.items', img: '/impact3.jpg' },
   ];
 
   return (
@@ -68,7 +68,7 @@ export default function ProgramsPage() {
                 <a
                   key={p.id}
                   href={`#program-${p.id}`}
-                  className="small-caps py-4 whitespace-nowrap border-b-2 border-transparent hover:border-current transition-all duration-200 flex-shrink-0"
+                  className="small-caps py-4 whitespace-nowrap border-b-2 border-transparent hover:border-current transition-all duration-200 shrink-0"
                   style={{ color: c.accent }}
                 >
                   {p.num} · {t(p.titleKey as Parameters<typeof t>[0])}
@@ -98,23 +98,21 @@ export default function ProgramsPage() {
                 {/* Visual */}
                 <motion.div {...fadeUp(0)} className={isEven ? '' : 'lg:order-2'}>
                   <div
-                    className="relative rounded-2xl overflow-hidden flex items-center justify-center"
-                    style={{ height: '340px', background: c.bg, borderTop: c.border }}
+                    className="relative rounded-2xl overflow-hidden group"
+                    style={{ height: '380px', borderTop: c.border, boxShadow: '0 8px 40px rgba(26,17,9,0.12)' }}
                   >
-                    <span className="font-display font-bold select-none" style={{ fontSize: '14rem', lineHeight: 1, color: 'rgba(26,17,9,0.06)' }}>
-                      {program.num}
-                    </span>
+                    <img
+                      src={program.img}
+                      alt={t(program.titleKey as Parameters<typeof t>[0])}
+                      className="w-full h-full transition-transform duration-700 group-hover:scale-105"
+                      style={{ objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                    />
+                    {/* Num badge overlay */}
                     <div
-                      className="absolute bottom-8 left-8 right-8 rounded-xl p-5"
-                      style={{ background: 'white', boxShadow: '0 4px 20px rgba(26,17,9,0.08)' }}
+                      className="absolute top-5 left-5 flex items-center justify-center rounded-full font-display font-bold text-lg"
+                      style={{ width: '52px', height: '52px', background: c.accent, color: 'white', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}
                     >
-                      <p className="small-caps mb-1">Impact</p>
-                      <p className="font-display font-bold" style={{ fontSize: '2.5rem', color: c.accent, lineHeight: 1 }}>
-                        {program.impactValue}
-                      </p>
-                      <p className="text-sm mt-1" style={{ color: 'var(--muted)' }}>
-                        {t(program.impactLabelKey as Parameters<typeof t>[0])}
-                      </p>
+                      {program.num}
                     </div>
                   </div>
                 </motion.div>
