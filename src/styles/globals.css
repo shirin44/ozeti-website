@@ -1,7 +1,7 @@
-@import '@fontsource/playfair-display/700.css';
-@import '@fontsource/dm-sans/300.css';
-@import '@fontsource/dm-sans/400.css';
-@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/roboto-slab/700.css';
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
 @import 'tailwindcss';
 
 @theme {
@@ -15,8 +15,8 @@
   --color-dark: #1A1109;
   --color-mid: #4A3728;
   --color-muted: #8A7060;
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Roboto Slab", Georgia, serif;
+  --font-sans: "Roboto", sans-serif;
 }
 
 /* ─── CSS Custom Properties ─── */

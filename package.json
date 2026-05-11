@@ -12,6 +12,8 @@
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
+    "@fontsource/roboto": "^5.2.10",
+    "@fontsource/roboto-slab": "^5.2.8",
     "@tailwindcss/postcss": "^4.2.4",
     "autoprefixer": "^10.5.0",
     "framer-motion": "^12.38.0",
