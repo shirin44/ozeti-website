@@ -129,11 +129,8 @@ export default function AboutPage() {
 
             {/* Right: photo + compact legal card */}
             <motion.div {...fadeUp(0.15)} className="flex flex-col gap-5">
-              <AbImg src="/about/1.jpg" alt="OZETI — équipe" height="300px" accent="var(--rouge)" />
-              <div className="grid grid-cols-2 gap-4">
-                <AbImg src="/about/2.jpg" alt="OZETI — activités" height="180px" accent="var(--jaune)" />
-                <AbImg src="/about/3.jpg" alt="OZETI — communauté" height="180px" accent="var(--vert)" />
-              </div>
+              <AbImg src="/about/1.jpg" alt="OZETI — équipe" height="320px" accent="var(--rouge)" />
+              <AbImg src="/about/2.jpg" alt="OZETI — activités" height="220px" accent="var(--jaune)" />
               {/* Compact legal strip */}
               <div className="rounded-xl px-6 py-4 flex flex-wrap gap-x-8 gap-y-2"
                 style={{ background: 'white', boxShadow: '0 1px 8px rgba(26,17,9,0.06)', borderTop: '3px solid var(--jaune)' }}>
@@ -187,15 +184,10 @@ export default function AboutPage() {
             <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)' }}>{t('about.vision.h3')}</h2>
           </motion.div>
 
-          {/* Mosaic: tall left + 2 stacked right */}
-          <motion.div className="grid grid-cols-1 md:grid-cols-12 gap-4 mb-16" {...fadeUp(0.1)}>
-            <div className="md:col-span-7">
-              <AbImg src="/about/4.jpg" alt="Vision OZETI" height="480px" accent="var(--rouge)" />
-            </div>
-            <div className="md:col-span-5 flex flex-col gap-4">
-              <AbImg src="/about/5.jpg" alt="OZETI — terrain" height="228px" accent="var(--jaune)" />
-              <AbImg src="/about/6.jpg" alt="OZETI — formation" height="228px" accent="var(--vert)" />
-            </div>
+          {/* Two-photo side by side */}
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16" {...fadeUp(0.1)}>
+            <AbImg src="/about/3.jpg" alt="OZETI — terrain" height="360px" accent="var(--rouge)" />
+            <AbImg src="/about/4.jpg" alt="OZETI — formation" height="360px" accent="var(--jaune)" />
           </motion.div>
 
           {/* Vision + Mission cards */}
