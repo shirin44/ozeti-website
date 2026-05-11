@@ -33,9 +33,9 @@ export default function ProgramsPage() {
   const { t, tArr } = useLanguage();
 
   const programs: { id: number; num: string; color: ColorKey; titleKey: string; tagKey: string; descKey: string; itemsKey: string; img: string }[] = [
-    { id: 1, num: '01', color: 'rouge', titleKey: 'programs.edu.title', tagKey: 'programs.edu.tag', descKey: 'programs.edu.desc', itemsKey: 'programs.edu.items', img: '/impact1.jpg' },
-    { id: 2, num: '02', color: 'jaune', titleKey: 'programs.psy.title', tagKey: 'programs.psy.tag', descKey: 'programs.psy.desc', itemsKey: 'programs.psy.items', img: '/impact2.jpg' },
-    { id: 3, num: '03', color: 'vert',  titleKey: 'programs.eco.title', tagKey: 'programs.eco.tag', descKey: 'programs.eco.desc', itemsKey: 'programs.eco.items', img: '/impact3.jpg' },
+    { id: 1, num: '01', color: 'rouge', titleKey: 'programs.edu.title', tagKey: 'programs.edu.tag', descKey: 'programs.edu.desc', itemsKey: 'programs.edu.items', img: '/1.jpg' },
+    { id: 2, num: '02', color: 'jaune', titleKey: 'programs.psy.title', tagKey: 'programs.psy.tag', descKey: 'programs.psy.desc', itemsKey: 'programs.psy.items', img: '/2.jpg' },
+    { id: 3, num: '03', color: 'vert',  titleKey: 'programs.eco.title', tagKey: 'programs.eco.tag', descKey: 'programs.eco.desc', itemsKey: 'programs.eco.items', img: '/3.jpg' },
   ];
 
   return (
@@ -46,9 +46,9 @@ export default function ProgramsPage() {
         <TrioStripe />
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-16">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
-            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>{t('programs.breadcrumb')}</p>
-            <h1 className="text-white mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>{t('programs.h1')}</h1>
-            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 300 }}>{t('programs.sub')}</p>
+            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.6)' }}>{t('programs.breadcrumb')}</p>
+            <h1 className="mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: 'white' }}>{t('programs.h1')}</h1>
+            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300 }}>{t('programs.sub')}</p>
           </motion.div>
         </div>
         <div

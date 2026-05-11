@@ -60,9 +60,9 @@ export default function AboutPage() {
         <TrioStripe />
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-16">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
-            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>{t('about.breadcrumb')}</p>
-            <h1 className="text-white mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>{t('about.h1')}</h1>
-            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 300 }}>{t('about.sub')}</p>
+            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.6)' }}>{t('about.breadcrumb')}</p>
+            <h1 className="mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: 'white' }}>{t('about.h1')}</h1>
+            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300 }}>{t('about.sub')}</p>
           </motion.div>
         </div>
         <div className="absolute right-10 bottom-0 font-display font-bold select-none pointer-events-none" style={{ fontSize: '18rem', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }} aria-hidden>★</div>
@@ -130,22 +130,35 @@ export default function AboutPage() {
       </section>
 
       {/* ─── Vision & Mission ─── */}
-      <section className="section-padding" style={{ background: 'var(--dark)' }}>
+      <section className="section-padding" style={{ background: 'white' }}>
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <motion.div className="mb-16" {...fadeUp()}>
+            <p className="small-caps mb-4" style={{ color: 'var(--muted)' }}>{t('about.vision.label')}</p>
+            <h2 className="mb-4" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)' }}>{t('about.vision.h3')}</h2>
+            <TrioStripe className="w-12" />
+          </motion.div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <motion.div {...fadeUp()}>
-              <p className="small-caps mb-4" style={{ color: 'rgba(255,255,255,0.35)' }}>{t('about.vision.label')}</p>
-              <h2 className="text-white mb-6" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)' }}>{t('about.vision.h3')}</h2>
-              <TrioStripe className="w-12 mb-10" />
+            {/* Left: photo */}
+            <motion.div {...fadeUp(0.1)}>
+              <div className="rounded-2xl overflow-hidden" style={{ height: '420px', boxShadow: '0 8px 32px rgba(26,17,9,0.1)', borderTop: '3px solid var(--jaune)' }}>
+                <img
+                  src="/1.jpg"
+                  alt="Vision OZETI"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
+                />
+              </div>
             </motion.div>
-            <motion.div className="space-y-8" {...fadeUp(0.1)}>
+
+            {/* Right: vision + mission cards */}
+            <motion.div className="space-y-8" {...fadeUp(0.15)}>
               {[
                 { label: t('about.vision.vlabel'), text: t('about.vision.v'), accent: 'var(--jaune)' },
                 { label: t('about.vision.mlabel'), text: t('about.vision.m'), accent: 'var(--rouge)' },
               ].map(({ label, text, accent }) => (
-                <div key={label} className="p-7 rounded-2xl" style={{ background: 'rgba(255,255,255,0.04)', borderLeft: `3px solid ${accent}` }}>
-                  <p className="small-caps mb-3" style={{ color: accent }}>{label}</p>
-                  <p className="text-base leading-relaxed" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300 }}>{text}</p>
+                <div key={label} className="p-7 rounded-2xl" style={{ background: 'var(--cream)', borderLeft: `3px solid ${accent}` }}>
+                  <p className="small-caps mb-3" style={{ color: 'var(--muted)' }}>{label}</p>
+                  <p className="text-base leading-relaxed" style={{ color: 'var(--mid)', fontWeight: 300 }}>{text}</p>
                 </div>
               ))}
             </motion.div>

@@ -111,15 +111,6 @@ export default function HomePage() {
                 <Link to="/programs"><button className="btn-outline-dark">{t('hero.cta2')}</button></Link>
               </motion.div>
 
-              <motion.p
-                className="small-caps"
-                style={{ color: 'var(--muted)' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                {t('hero.verified')}
-              </motion.p>
             </motion.div>
 
             {/* Right — hero photo */}
@@ -178,31 +169,8 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ════ MARQUEE ════ */}
-      <div
-        className="overflow-hidden"
-        style={{ borderTop: '1px solid rgba(74,55,40,0.1)', borderBottom: '1px solid rgba(74,55,40,0.1)', background: 'white', padding: '0.875rem 0' }}
-      >
-        <motion.div
-          className="flex whitespace-nowrap"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 26, repeat: Infinity, ease: 'linear' }}
-        >
-          {[...Array(10)].map((_, i) => (
-            <span key={i} className="small-caps inline-flex items-center gap-8 px-10" style={{ color: 'var(--muted)', fontSize: '0.72rem' }}>
-              <span className="font-display italic" style={{ color: 'var(--rouge)', fontSize: '1.1rem' }}>★</span>
-              {t('ticker.1')}
-              <span className="font-display italic" style={{ color: 'var(--jaune)', fontSize: '1.1rem' }}>★</span>
-              {t('ticker.2')}
-              <span className="font-display italic" style={{ color: 'var(--vert)', fontSize: '1.1rem' }}>★</span>
-              {t('ticker.3')}
-            </span>
-          ))}
-        </motion.div>
-      </div>
-
       {/* ════ MISSION ════ */}
-      <section className="section-padding">
+      <section className="section-padding" style={{ background: 'white' }}>
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <motion.div className="mb-20" {...fadeUp()}>
             <p className="small-caps mb-3" style={{ color: 'var(--rouge)' }}>{t('mission.label')}</p>

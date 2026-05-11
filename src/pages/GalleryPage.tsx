@@ -53,13 +53,13 @@ export default function GalleryPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease }}
           >
-            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>
+            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.6)' }}>
               {t('gallery.breadcrumb')}
             </p>
-            <h1 className="text-white mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>
+            <h1 className="mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: 'white' }}>
               {t('gallery.h1')}
             </h1>
-            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 300 }}>
+            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300 }}>
               {t('gallery.sub')}
             </p>
           </motion.div>
