@@ -288,24 +288,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-center">
 
             <motion.div
-              className="relative h-110 flex items-center justify-center order-2 lg:order-1"
+              className="flex items-start justify-center order-2 lg:order-1"
               initial={{ opacity: 0, x: -36 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease }}
             >
-              <div className="absolute inset-10 rounded-3xl" style={{ background: 'var(--vert-light)', border: '1.5px solid rgba(27,122,62,0.18)', transform: 'rotate(-3deg)' }} />
-              <div className="absolute inset-10 rounded-3xl" style={{ background: 'var(--jaune-light)', border: '1.5px solid rgba(245,197,24,0.3)', transform: 'rotate(1.5deg)' }} />
-              <div className="relative z-10 rounded-2xl overflow-hidden" style={{ width: '220px', height: '300px', boxShadow: '0 20px 60px rgba(26,17,9,0.18)' }}>
+              <div className="rounded-2xl overflow-hidden" style={{ width: '100%', maxWidth: '380px', boxShadow: '0 20px 60px rgba(26,17,9,0.15)' }}>
                 <img
                   src="/founder.jpg"
                   alt="Rose Darline Chatelain — Fondatrice OZETI"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+                  style={{ width: '100%', height: '460px', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
                 />
               </div>
-              <motion.div className="absolute top-6 right-8" animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}>
-                <span className="font-display" style={{ fontSize: '1.75rem', color: 'var(--jaune)' }}>★</span>
-              </motion.div>
             </motion.div>
 
             <motion.div
