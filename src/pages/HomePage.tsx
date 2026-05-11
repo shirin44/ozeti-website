@@ -36,9 +36,9 @@ export default function HomePage() {
   const quoteX = useTransform(quoteScroll, [0, 1], ['8%', '0%']);
 
   const missionItems = [
-    { num: '01', accent: 'var(--rouge)', img: '/1.jpg', titleKey: 'mission.01.title', descKey: 'mission.01.desc', detailKey: 'mission.01.detail' },
-    { num: '02', accent: 'var(--jaune)', img: '/2.jpg', titleKey: 'mission.02.title', descKey: 'mission.02.desc', detailKey: 'mission.02.detail' },
-    { num: '03', accent: 'var(--vert)',  img: '/3.jpg', titleKey: 'mission.03.title', descKey: 'mission.03.desc', detailKey: 'mission.03.detail' },
+    { num: '01', accent: 'var(--rouge)', img: '/a.jpg', titleKey: 'mission.01.title', descKey: 'mission.01.desc', detailKey: 'mission.01.detail' },
+    { num: '02', accent: 'var(--jaune)', img: '/b.jpg', titleKey: 'mission.02.title', descKey: 'mission.02.desc', detailKey: 'mission.02.detail' },
+    { num: '03', accent: 'var(--vert)',  img: '/c.jpg', titleKey: 'mission.03.title', descKey: 'mission.03.desc', detailKey: 'mission.03.detail' },
   ] as const;
 
   return (
