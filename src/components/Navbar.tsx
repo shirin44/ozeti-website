@@ -111,11 +111,11 @@ export default function Navbar() {
                 <span style={{ color: lang === 'en' ? 'var(--rouge)' : 'var(--muted)', transition: 'color 0.2s' }}>EN</span>
               </button>
 
-              <Link to="/contact">
+              <a href="https://www.paypal.me/RoseDarlineChatelain" target="_blank" rel="noopener noreferrer">
                 <button className="btn-primary" style={{ padding: '0.6rem 1.4rem', fontSize: '0.875rem' }}>
                   {t('nav.support')}
                 </button>
-              </Link>
+              </a>
             </div>
 
             {/* Hamburger */}
@@ -215,11 +215,11 @@ export default function Navbar() {
                     <span style={{ color: lang === 'en' ? 'var(--rouge)' : 'var(--muted)' }}>English</span>
                   </button>
                 </div>
-                <Link to="/contact" className="block">
+                <a href="https://www.paypal.me/RoseDarlineChatelain" target="_blank" rel="noopener noreferrer" className="block">
                   <button className="btn-primary w-full justify-center">
                     {t('nav.support')}
                   </button>
-                </Link>
+                </a>
                 <p className="text-xs text-center text-muted mt-4 leading-snug">
                   {t('nav.reg')}
                 </p>
