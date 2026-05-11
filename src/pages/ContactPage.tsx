@@ -66,20 +66,36 @@ export default function ContactPage() {
   const { t } = useLanguage();
   const [form, setForm]           = useState({ nom: '', email: '', sujet: 'general', message: '' });
   const [submitted, setSubmitted] = useState(false);
-  const [textFocused, setTextFocused]   = useState(false);
+  const [loading, setLoading]     = useState(false);
+  const [error, setError]         = useState(false);
+  const [textFocused, setTextFocused]     = useState(false);
   const [selectFocused, setSelectFocused] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setForm({ nom: '', email: '', sujet: 'general', message: '' });
-      setSubmitted(false);
-    }, 4000);
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch('https://formspree.io/f/xyzezpny', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name: form.nom, email: form.email, subject: form.sujet, message: form.message }),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        setForm({ nom: '', email: '', sujet: 'general', message: '' });
+      } else {
+        setError(true);
+      }
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const faqs = [
@@ -96,9 +112,9 @@ export default function ContactPage() {
         <TrioStripe />
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-16">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
-            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.4)' }}>{t('contact.breadcrumb')}</p>
-            <h1 className="text-white mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>{t('contact.h1')}</h1>
-            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 300 }}>{t('contact.sub')}</p>
+            <p className="small-caps mb-5" style={{ color: 'rgba(255,255,255,0.6)' }}>{t('contact.breadcrumb')}</p>
+            <h1 className="mb-4" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', color: 'white' }}>{t('contact.h1')}</h1>
+            <p className="text-lg max-w-xl" style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 300 }}>{t('contact.sub')}</p>
           </motion.div>
         </div>
         <div className="absolute right-10 bottom-0 font-display font-bold select-none pointer-events-none" style={{ fontSize: '18rem', color: 'rgba(255,255,255,0.03)', lineHeight: 1 }} aria-hidden>★</div>
@@ -237,8 +253,13 @@ export default function ContactPage() {
                       />
                     </div>
 
-                    <button type="submit" className="btn-primary">
-                      {t('contact.form.send')} <Send size={15} />
+                    {error && (
+                      <p className="text-sm" style={{ color: 'var(--rouge)' }}>
+                        {t('contact.form.error') || 'Une erreur est survenue. Réessayez ou écrivez-nous directement.'}
+                      </p>
+                    )}
+                    <button type="submit" className="btn-primary" disabled={loading} style={{ opacity: loading ? 0.7 : 1 }}>
+                      {loading ? '…' : <>{t('contact.form.send')} <Send size={15} /></>}
                     </button>
                   </form>
                 )}
