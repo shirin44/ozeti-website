@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage';
 import ProgramsPage from './pages/ProgramsPage';
 import GalleryPage from './pages/GalleryPage';
 import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
 import './styles/globals.css';
 
 const pageVariants = {
@@ -37,6 +38,7 @@ function AnimatedRoutes() {
             <Route path="/programs" element={<ProgramsPage />} />
             <Route path="/gallery"  element={<GalleryPage />} />
             <Route path="/contact"  element={<ContactPage />} />
+            <Route path="*"         element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
