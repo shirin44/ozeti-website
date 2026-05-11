@@ -255,7 +255,7 @@ export default function ContactPage() {
 
                     {error && (
                       <p className="text-sm" style={{ color: 'var(--rouge)' }}>
-                        {t('contact.form.error') || 'Une erreur est survenue. Réessayez ou écrivez-nous directement.'}
+                        {'Une erreur est survenue. Réessayez ou écrivez-nous directement.'}
                       </p>
                     )}
                     <button type="submit" className="btn-primary" disabled={loading} style={{ opacity: loading ? 0.7 : 1 }}>

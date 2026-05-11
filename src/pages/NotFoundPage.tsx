@@ -58,8 +58,8 @@ export default function NotFoundPage() {
         transition={{ duration: 0.6, ease, delay: 0.3 }}
       >
         {lang === 'fr'
-          ? 'Cette page n'existe pas. Vous serez redirigé·e vers l'accueil dans quelques secondes.'
-          : 'This page doesn't exist. You'll be redirected to the home page in a few seconds.'}
+          ? "Cette page n'existe pas. Vous serez redirigé·e vers l'accueil dans quelques secondes."
+          : "This page doesn't exist. You'll be redirected to the home page in a few seconds."}
       </motion.p>
 
       <motion.div
@@ -70,7 +70,7 @@ export default function NotFoundPage() {
         <Link to="/">
           <button className="btn-primary">
             <ArrowLeft size={15} />
-            {lang === 'fr' ? 'Retour à l'accueil' : 'Back to home'}
+            {lang === 'fr' ? "Retour à l'accueil" : 'Back to home'}
           </button>
         </Link>
       </motion.div>
