@@ -33,9 +33,9 @@ export default function ProgramsPage() {
   const { t, tArr } = useLanguage();
 
   const programs: { id: number; num: string; color: ColorKey; titleKey: string; tagKey: string; descKey: string; itemsKey: string; img: string }[] = [
-    { id: 1, num: '01', color: 'rouge', titleKey: 'programs.edu.title', tagKey: 'programs.edu.tag', descKey: 'programs.edu.desc', itemsKey: 'programs.edu.items', img: '/1.jpg' },
-    { id: 2, num: '02', color: 'jaune', titleKey: 'programs.psy.title', tagKey: 'programs.psy.tag', descKey: 'programs.psy.desc', itemsKey: 'programs.psy.items', img: '/2.jpg' },
-    { id: 3, num: '03', color: 'vert',  titleKey: 'programs.eco.title', tagKey: 'programs.eco.tag', descKey: 'programs.eco.desc', itemsKey: 'programs.eco.items', img: '/3.jpg' },
+    { id: 1, num: '01', color: 'rouge', titleKey: 'programs.edu.title', tagKey: 'programs.edu.tag', descKey: 'programs.edu.desc', itemsKey: 'programs.edu.items', img: '/a.jpg' },
+    { id: 2, num: '02', color: 'jaune', titleKey: 'programs.psy.title', tagKey: 'programs.psy.tag', descKey: 'programs.psy.desc', itemsKey: 'programs.psy.items', img: '/b.jpg' },
+    { id: 3, num: '03', color: 'vert',  titleKey: 'programs.eco.title', tagKey: 'programs.eco.tag', descKey: 'programs.eco.desc', itemsKey: 'programs.eco.items', img: '/c.jpg' },
   ];
 
   return (
