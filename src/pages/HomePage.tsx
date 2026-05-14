@@ -128,7 +128,7 @@ export default function HomePage() {
               {/* Photo */}
               <div className="relative rounded-2xl overflow-hidden" style={{ zIndex: 1, boxShadow: '0 32px 80px rgba(26,17,9,0.18)' }}>
                 <img
-                  src="/newhero.JPG"
+                  src="/newhero.jpg"
                   alt="OZETI — jeunes filles"
                   style={{ width: '100%', height: 'clamp(480px, 55vh, 680px)', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
                 />
