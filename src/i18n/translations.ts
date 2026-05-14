@@ -9,7 +9,7 @@ const translations = {
     'nav.gallery':  'Galerie',
     'nav.contact':  'Contact',
     'nav.support':  'Nous Soutenir',
-    'nav.reg':      'Enregistrée MAST · N° STZ1-37440',
+    'nav.reg':      'Enregistrée au MAST · N° STZ1-37440',
 
     /* ── Hero ── */
     'hero.tagline':    'Organisation à but non lucratif · Fondée 2020',
@@ -25,7 +25,7 @@ const translations = {
     'hero.scroll':     'Découvrir',
 
     /* ── Ticker ── */
-    'ticker.1': 'Fondée 2020 — Gonaïves',
+    'ticker.1': 'Fondée en 2020 — Gonaïves',
     'ticker.2': 'MAST · STZ1-37440',
     'ticker.3': '3 Axes d\'action',
 
@@ -197,11 +197,11 @@ const translations = {
     'hero.sub':        '— We guide every girl toward her own light.',
     'hero.cta1':       'Our mission',
     'hero.cta2':       'Our programs',
-    'hero.verified':   '✓ Registered MAST · No. STZ1-37440',
+    'hero.verified':   'MAST Registration · No. STZ1-37440',
     'hero.scroll':     'Discover',
 
     /* ── Ticker ── */
-    'ticker.1': 'Founded 2020 — Gonaïves',
+    'ticker.1': 'Founded in 2020 — Gonaïves',
     'ticker.2': 'MAST · STZ1-37440',
     'ticker.3': '3 Action Areas',
 
